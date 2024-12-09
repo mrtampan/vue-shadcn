@@ -3,6 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { summary } from "@/data/summary";
 import { formatNumber } from "@/composables/Numbers";
 import { ChartLine, CreditCard, DollarSign, Users } from "lucide-vue-next";
+import LineChart from "./ui/chart-line/LineChart.vue";
+import { statistic } from "@/data/statistic";
+
 </script>
 
 <template>
@@ -80,6 +83,21 @@ import { ChartLine, CreditCard, DollarSign, Users } from "lucide-vue-next";
           </p>
         </CardContent>
       </Card>
+    </div>
+
+    <div class="mt-4">
+      <LineChart
+        :data="statistic"
+        index="year"
+        :categories="['Export Growth Rate', 'Import Growth Rate']"
+        :y-formatter="
+          (tick, i) => {
+            return typeof tick === 'number'
+              ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
+              : '';
+          }
+        "
+      />
     </div>
   </div>
 </template>
