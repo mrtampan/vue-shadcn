@@ -3,9 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { summary } from "@/data/summary";
 import { formatNumber } from "@/composables/Numbers";
 import { ChartLine, CreditCard, DollarSign, Users } from "lucide-vue-next";
-import LineChart from "./ui/chart-line/LineChart.vue";
-import { statistic } from "@/data/statistic";
-
+import Overview from "./Overview.vue";
+import RecentSales from "./RecentSales.vue";
 </script>
 
 <template>
@@ -85,19 +84,26 @@ import { statistic } from "@/data/statistic";
       </Card>
     </div>
 
-    <div class="mt-4">
-      <LineChart
-        :data="statistic"
-        index="year"
-        :categories="['Export Growth Rate', 'Import Growth Rate']"
-        :y-formatter="
-          (tick, i) => {
-            return typeof tick === 'number'
-              ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
-              : '';
-          }
-        "
-      />
+    <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <Card class="col-span-4">
+        <CardHeader class="">
+          <CardTitle class="text-sm font-large"> Overview </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Overview />
+        </CardContent>
+      </Card>
+      <Card class="col-span-3">
+        <CardHeader class="">
+          <CardTitle class=""> 
+            <div class="text-sm font-large">Recent Sales</div>
+          </CardTitle>
+          <div class="text-sm text-muted-foreground">You made 265 sales this month.</div>
+        </CardHeader>
+        <CardContent>
+          <RecentSales />
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>
